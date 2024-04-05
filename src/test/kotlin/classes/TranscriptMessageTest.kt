@@ -1,6 +1,6 @@
 package classes
 
-import de.till.classes.TranscriptMessage
+import de.till.transcripts.classes.TranscriptMessage
 import dev.fruxz.ascend.tool.time.calendar.Calendar
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test

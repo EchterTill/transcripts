@@ -1,4 +1,4 @@
-package de.till.classes
+package de.till.transcripts.classes
 
 class Transcript {
     val channel: String

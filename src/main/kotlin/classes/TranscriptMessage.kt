@@ -1,4 +1,4 @@
-package de.till.classes
+package de.till.transcripts.classes
 
 import de.till.converter.MentionConverter
 import dev.fruxz.ascend.extension.time.hour

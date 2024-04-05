@@ -1,4 +1,4 @@
-package de.till.converter
+package de.till.transcripts.converter
 
 import net.dv8tion.jda.api.entities.User
 
