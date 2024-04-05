@@ -35,7 +35,7 @@ class Transcript {
                 val formatDate = message.time.getFormatted(Locale.GERMAN, FormatStyle.MEDIUM, FormatStyle.SHORT)
 
                 html += "<div class=\"author-message\">"
-                html += "<img src=\"${message.avatarUrl}\">"
+                html += "<img src=\"${message.avatarUrl}\"></img>"
                 html += "<div>"
                 html += "<p><b>${message.username}</b><span class=\"author-date\">$formatDate</span></p>"
                 html += message.toHTML()
