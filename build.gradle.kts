@@ -13,6 +13,7 @@ repositories {
     mavenCentral()
     maven("https://nexus.flawcra.cc/repository/mirrors/")
     maven("https://repo.fruxz.dev/releases/")
+    maven("https://m2.coly.dev/releases")
 
 }
 
@@ -21,6 +22,7 @@ dependencies {
     implementation("org.jetbrains:markdown:0.6.1")
     implementation("dev.fruxz:ascend:2024.1.1")
     implementation("net.dv8tion:JDA:$jdaVersion")
+    implementation("dev.coly:JDATesting:0.6.0")
     implementation("org.junit.jupiter:junit-jupiter:$junitVersion")
 }
 
