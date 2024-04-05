@@ -15,6 +15,7 @@ class TranscriptMessage {
     val username: String
     val userId: String
     val time: Calendar
+    val avatarUrl: String?
     val mentions: Map<String, String>
 
     constructor(
@@ -25,6 +26,7 @@ class TranscriptMessage {
         this.userId = userId
         this.time = time
         this.mentions = mentions
+        this.avatarUrl = "https://picsum.photos/200"
     }
 
     private constructor(message: Message) {
@@ -33,6 +35,7 @@ class TranscriptMessage {
         userId = message.author.id
         time = Calendar(message.timeCreated.toLocalDateTime())
         mentions = message.mentions.users.associate { it.id to it.name }
+        avatarUrl = message.author.avatarUrl
 
 
     }
