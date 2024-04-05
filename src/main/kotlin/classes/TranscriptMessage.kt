@@ -1,6 +1,6 @@
 package de.till.transcripts.classes
 
-import de.till.converter.MentionConverter
+import de.till.transcripts.converter.MentionConverter
 import dev.fruxz.ascend.extension.time.hour
 import dev.fruxz.ascend.extension.time.minute
 import dev.fruxz.ascend.tool.time.calendar.Calendar
