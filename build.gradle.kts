@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "de.till"
-version = "1.0-SNAPSHOT"
+version = "0.0.1"
 
 val jdaVersion: String by project
 val junitVersion: String by project
