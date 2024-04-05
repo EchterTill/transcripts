@@ -1,5 +1,8 @@
 package de.till.transcripts.classes
 
+import dev.fruxz.ascend.extension.time.hour
+import dev.fruxz.ascend.extension.time.minute
+
 class Transcript {
     val channel: String
     var messages: List<TranscriptMessage>
@@ -17,6 +20,7 @@ class Transcript {
 
 
     fun toHTML(): String {
+        var lastAuthor = ""
         var html = ""
         // add CSS
         html += style
@@ -25,6 +29,18 @@ class Transcript {
         html += "<div class=\"message-history\">\n"
 
         messages.forEach { message ->
+            if (lastAuthor != message.userId) {
+                html += "<div class=\"author-message\">"
+                html += "<img src=\"https://picsum.photos/200\">"
+                html += "<div>"
+                html += "<p><u><b>${message.username}</u></b><span class=\"author-date\">${message.time.hour}:${message.time.minute}</span></p>"
+                html += message.toHTML()
+                html += "</div>"
+                html += "</div>"
+
+                lastAuthor = message.userId
+                return@forEach
+            }
             html += message.toHTML()
         }
 
@@ -49,11 +65,11 @@ private val style = """
     .user-mention::before {
         content: "@";
     }
-    
+
     .message-history > p {
         vertical-align: middle;
     }
-    
+
     .message-history > p::before {
         content: attr(time);
         display: inline-block;
@@ -62,8 +78,39 @@ private val style = """
         font-size: .7em;
         padding-right: .33em;
         color: hsl( 214 calc( 1 * 8.1%) 61.2% / 1);
-
+        width: 3rem;
+        padding: 0 0.5rem 0 0;
+        text-align: center;
     }
-            
+    .message-history > p {
+        margin-top: 4px;
+        margin-bottom: 8px;
+    }
+    .author-message {
+        display: flex;
+    }
+    .author-message > img {
+        margin-right: .5rem;
+        height: 3rem;
+        width: 3rem;
+        border-radius: 100%;
+    }
+
+    .author-message > div {
+        display: flex;
+        gap: 4px;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .author-message > div > p {
+        margin: 0;
+    }
+
+    .author-date {
+        font-size: .7em;
+        padding-left: .33em;
+        color: hsl( 214 calc( 1 * 8.1%) 61.2% / 1);
+    }
     </style>
     """.trimIndent()
