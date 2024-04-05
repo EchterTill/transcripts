@@ -21,10 +21,13 @@ class Transcript {
 
     fun toHTML(): String {
         var lastAuthor = ""
-        var html = ""
-        // add CSS
-        html += "<meta charset=\"UTF-8\">\n"
+        var html = "<!DOCTYPE html>\n"
+        html += "<html>"
+        html += "<head>\n"
+        html += "<meta charset=\"UTF-8\"></meta>\n"
         html += style
+        html += "</head>\n"
+        html += "<body>\n"
 
         html += "<h1>Transcript</h1>\n"
         html += "<div class=\"message-history\">\n"
@@ -48,7 +51,9 @@ class Transcript {
             html += message.toHTML()
         }
 
-        html += "</div>"
+        html += "</div>\n"
+        html += "</body>\n"
+        html += "</html>"
 
         return html
     }
@@ -56,11 +61,11 @@ class Transcript {
 
 private val style = """
     <style>
-    :root {
+    html {
         font-family: sans-serif;
         color: white;
         background-color: #313338;
-        overflow-wrap: break-word;
+        word-wrap: break-word;
     }
     a {
         color: #00a8fc;
@@ -113,6 +118,7 @@ private val style = """
     .author-message {
         display: flex;
         margin-top: 16px;
+        min-height: 3em;
     }
     .author-message > img {
         margin-right: .5rem;
