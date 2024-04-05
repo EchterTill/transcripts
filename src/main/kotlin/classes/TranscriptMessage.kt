@@ -1,6 +1,8 @@
 package de.till.classes
 
 import de.till.converter.MentionConverter
+import dev.fruxz.ascend.extension.time.hour
+import dev.fruxz.ascend.extension.time.minute
 import dev.fruxz.ascend.tool.time.calendar.Calendar
 import net.dv8tion.jda.api.entities.Message
 import org.intellij.markdown.IElementType
@@ -51,6 +53,8 @@ class TranscriptMessage {
         // Mentions to html tags
         html = MentionConverter.convertUserMentions(html, mentions)
 
+        // Add Timestamp
+        html = html.replace("<p>", "<p time=\"${time.hour}:${time.minute}\">")
         return html
     }
 

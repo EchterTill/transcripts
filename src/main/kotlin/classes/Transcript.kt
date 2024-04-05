@@ -22,10 +22,13 @@ class Transcript {
         html += style
 
         html += "<h1>Transcript</h1>\n"
+        html += "<div class=\"message-history\">\n"
 
         messages.forEach { message ->
             html += message.toHTML()
         }
+
+        html += "</div>"
 
         return html
     }
@@ -45,6 +48,21 @@ private val style = """
     }
     .user-mention::before {
         content: "@";
+    }
+    
+    .message-history > p {
+        vertical-align: middle;
+    }
+    
+    .message-history > p::before {
+        content: attr(time);
+        display: inline-block;
+        line-height: 100%;
+        vertical-align:middle;
+        font-size: .7em;
+        padding-right: .33em;
+        color: hsl( 214 calc( 1 * 8.1%) 61.2% / 1);
+
     }
             
     </style>
