@@ -24,6 +24,8 @@ dependencies {
     implementation("net.dv8tion:JDA:$jdaVersion")
     implementation("dev.coly:JDATesting:0.6.0")
     implementation("org.junit.jupiter:junit-jupiter:$junitVersion")
+    implementation("com.openhtmltopdf:openhtmltopdf-core:1.0.10")
+    implementation("com.openhtmltopdf:openhtmltopdf-pdfbox:1.0.10")
 }
 
 tasks.test {
