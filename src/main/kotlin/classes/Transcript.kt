@@ -1,7 +1,7 @@
 package de.till.transcripts.classes
 
-import dev.fruxz.ascend.extension.time.hour
-import dev.fruxz.ascend.extension.time.minute
+import dev.fruxz.ascend.tool.time.calendar.Calendar.FormatStyle
+import java.util.*
 
 class Transcript {
     val channel: String
@@ -23,6 +23,7 @@ class Transcript {
         var lastAuthor = ""
         var html = ""
         // add CSS
+        html += "<meta charset=\"UTF-8\">\n"
         html += style
 
         html += "<h1>Transcript</h1>\n"
@@ -30,10 +31,13 @@ class Transcript {
 
         messages.forEach { message ->
             if (lastAuthor != message.userId) {
+
+                val formatDate = message.time.getFormatted(Locale.GERMAN, FormatStyle.MEDIUM, FormatStyle.SHORT)
+
                 html += "<div class=\"author-message\">"
-                html += "<img src=\"https://picsum.photos/200\">"
+                html += "<img src=\"${message.avatarUrl}\">"
                 html += "<div>"
-                html += "<p><u><b>${message.username}</u></b><span class=\"author-date\">${message.time.hour}:${message.time.minute}</span></p>"
+                html += "<p><b>${message.username}</b><span class=\"author-date\">$formatDate</span></p>"
                 html += message.toHTML()
                 html += "</div>"
                 html += "</div>"
@@ -55,7 +59,16 @@ private val style = """
     :root {
         font-family: sans-serif;
         color: white;
-        background-color: #424549;
+        background-color: #313338;
+        overflow-wrap: break-word;
+    }
+    a {
+        color: #00a8fc;
+    }
+
+    p~ul{
+        margin-top: -2px;
+        margin-bottom: 4px;
     }
     .user-mention {
         border-radius: .25em;
@@ -68,6 +81,16 @@ private val style = """
 
     .message-history > p {
         vertical-align: middle;
+        position: relative;
+        text-indent: -3.5rem;
+        padding-left: 3.5rem;
+    }
+
+    .message-history > ul {
+        padding-left: 4.75rem;
+    }
+    .message-history > h1, h2, h3, h4{
+        padding-left: 3.5rem;
     }
 
     .message-history > p::before {
@@ -76,18 +99,20 @@ private val style = """
         line-height: 100%;
         vertical-align:middle;
         font-size: .7em;
-        padding-right: .33em;
         color: hsl( 214 calc( 1 * 8.1%) 61.2% / 1);
         width: 3rem;
         padding: 0 0.5rem 0 0;
         text-align: center;
+        position: relative;
+        text-indent: 0;
     }
-    .message-history > p {
+    .message-history > p, ul {
         margin-top: 4px;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
     }
     .author-message {
         display: flex;
+        margin-top: 16px;
     }
     .author-message > img {
         margin-right: .5rem;
@@ -106,10 +131,14 @@ private val style = """
     .author-message > div > p {
         margin: 0;
     }
+    
+    .author-message > div > ul {
+        padding-left: 1.25em;
+    }
 
     .author-date {
         font-size: .7em;
-        padding-left: .33em;
+        padding-left: .5em;
         color: hsl( 214 calc( 1 * 8.1%) 61.2% / 1);
     }
     </style>
